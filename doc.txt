@@ -1,0 +1,70 @@
+_hash-store_
+==========================================
+
+By Jay McCarthy <jay.mccarthy@gmail.com>
+
+Keywords: _database_
+
+Introduction
+============
+
+A simple content-addressed storage layer.
+
+You probably want to wrap this in a caching layer, like one of my
+other packages.
+
+This is used is some of my web applications to give user's keys to
+persistent data.
+
+FILES
+====
+_sha1.ss_
+---------------
+
+Require it like this:
+
+> (require (planet "sha1.ss" ("jaymccarthy" "hash-store.plt" 1)))
+
+It provides the follow identifiers:
+
+> SHA1 : bytes? -> bytes?
+
+_hash-store.ss_
+---------------
+
+Require it like this:
+
+> (require (planet "hash-store.ss" ("jaymccarthy" "hash-store.plt" 1)))
+
+It provides the follow identifiers:
+
+> hash-store? : any/c -> boolean?
+
+> create : path? -> hash-store?
+
+> store! : hash-store? bytes? -> bytes?
+
+If the bytes are already in the store, there is no writing. The
+hash-code is returned.
+
+> lookup : hash-store? bytes? -> bytes?
+
+If the bytes are the key of something in the store, return that thing.
+
+> exn:fail:hash-store:exists? : any/c -> boolean?
+
+Thrown when `lookup' fails.
+
+Example
+=======
+
+See _test.ss_
+
+History
+======
+
+June 23rd, 2006
+     * Filename safe base64 mode (requires SVN of same day)
+
+June 22nd, 2006
+     * Initial
